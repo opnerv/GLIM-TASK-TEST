@@ -1,0 +1,47 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int solution(int a, int b, int c, int d) {
+    int answer = 0;
+    vector<int> dice { a, b, c, d };
+
+    sort(dice.begin(), dice.end(), std::greater<int>());
+    if(dice[0] == dice[3]) {
+        answer = dice[0] * 1111;
+    }
+    
+    else if(dice[0] == dice[2] && dice[2] != dice[3]) {
+        int value = 10 * dice[0] + dice[3];
+        answer = value * value;
+    }
+    
+    else if(dice[1] == dice[3] && dice[0] != dice[1]) {
+        int value = 10 * dice[1] + dice[0];
+        answer = value * value;
+    }
+    
+    else if(dice[0] == dice[1] && dice[2] == dice[3] && dice[1] != dice[2]) {
+        answer = (dice[1] + dice[2]) * (abs(dice[1] - dice[2]));
+    }
+    
+    else if(dice[0] == dice[1] && dice[1] != dice[2] && dice[2] != dice[3]) {
+        answer = dice[2] * dice[3];
+    }
+    
+    else if(dice[0] != dice[1] && dice[1] == dice[2] && dice[2] != dice[3]) {
+        answer = dice[0] * dice[3];
+    }
+    
+    else if(dice[0] != dice[1] && dice[1] != dice[2] && dice[2] == dice[3]) {
+        answer = dice[0] * dice[1];
+    }
+    
+    else {
+        answer = dice[3];
+    }
+    
+    return answer;
+}
